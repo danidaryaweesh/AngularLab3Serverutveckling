@@ -8,11 +8,11 @@ app.controller('personCtrl', function($scope, $http) {
 
     $scope.firstName = "John";
     $scope.lastName = "Doe";
-    $scope.lol="First";
+    $scope.messageText="Write a message...";
+    
     $scope.fullName = function() {
         return $scope.firstName + " " + $scope.lastName;
     };
-
 
     var taskSocket = new WebSocket("ws://localhost:1337");
 
@@ -30,7 +30,16 @@ app.controller('personCtrl', function($scope, $http) {
         long: "An error occured with the WebSocket."
     };
         $scope.$apply();
-    }
+    };
+
+    $scope.send = function () {
+        var from="Dodo";
+        var to="abas";
+        var body=$scope.messageText;
+        var messageToSend = JSON.stringify({from : from, body: body, to: to});
+        taskSocket.send(messageToSend);
+        $scope.messageText = "";
+    };
 });
 
 
