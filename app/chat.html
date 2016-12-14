@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Chat - Customer Module</title>
+    <link type="text/css" rel="stylesheet" href="style.css" />
+</head>
+
+<body ng-app="myApp" ng-controller="personCtrl">
+
+<div id="info" name="information">
+    From:<input name="username" type="text" id="from" size="35" ng-model="username"/>
+    To:  <input name="to" type="text" id="to" size="35" ng-model="to"/>
+    <button id="infoButton" ng-click="toggle()">Save</button>
+</div>
+
+<div id="wrapper">
+    <div id="menu">
+        <p class="welcome">Welcome {{username}}<b></b></p>
+        <p class="newChat"><a id="exit" target="_blank" href="/chat.html">new Chat</a></p>
+        <p class="OtherParter">Chatting with: {{to}}<b></b></p>
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="chatbox"></div>
+
+
+    <div name="message">
+        <input name="usermsg" type="text" id="usermsg" size="63" ng-model="messageText"/>
+        <button id="submitmsg" ng-click="send()">Send</button>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="bower_components/angular-websocket/dist/angular-websocket.js"></script>
+<script src="view1/controller.js"></script>
+<script type="text/javascript">
+    // jQuery Document
+    $(document).ready(function(){
+       /* working code
+
+        $("#exit").click(function(){
+            var exit = confirm("Are you sure you want to end the session?");
+            if(exit==true){window.location = 'index.html?logout=true';}
+        });*/
+
+    });
+</script>
+</body>
+</html>

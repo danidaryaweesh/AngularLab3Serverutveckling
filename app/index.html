@@ -4,23 +4,20 @@
   <meta charset="UTF-8">
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="bower_components/angular-websocket/dist/angular-websocket.js"></script>
-  <script src="view1/controller.js"></script>
+  <script src="view1/loginController.js"></script>
   <title>Home Page</title>
 </head>
 
 <body>
 
-<div ng-app="myApp" ng-controller="personCtrl">
-
-  First Name: <input type="text" ng-model="firstName"><br>
-  Last Name: <input type="text" ng-model="lastName"><br> <br /> <br />
-  Message: <input type="text" ng-model="messageText">
+<div ng-app="loginModule" ng-controller="loginController">
+  {{loading()}}
+  username:<input type="text" ng-model="username">
+  password:<input type="password" ng-model="password">
   <br /><br />
-  <button ng-click='send()'>Send Message</button>
+  <button ng-click='login()'>login</button>
   <br /> <br /> <br />
-  Full Name: {{fullName()}} <br />
-  Task: {{task}}
-
+  {{test}}
 </div>
 
 </body>
