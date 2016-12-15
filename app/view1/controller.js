@@ -70,38 +70,50 @@ app.service('socket', function($window) {
 
 app.controller('personCtrl', function($scope) {
 
-    $scope.username="";
     $scope.to="";
     $scope.messageText="";
-    $scope.message="";
-    $scope.messageList=[];
+    $scope.message="begining";
+    $scope.id=Math.floor((Math.random() * 10000000) + 1).toString();
 
     var taskSocket = new WebSocket("ws://localhost:1337");
 
+
    taskSocket.onmessage = function(message) {
-        var wholeMessage = JSON.parse(message.data);
-        var from = wholeMessage.from;
-        var body = wholeMessage.body;
-        $scope.message = from+":"+body;
-        console.log("Message: "+from+": "+body + "  and the whole message "+message.data.toString());
-        $scope.$apply();
+       var wholeMessage = JSON.parse(message.data);
+
+       console.log("In else");
+       var from = wholeMessage.from;
+       var body = wholeMessage.body;
+       $scope.message = from+":"+body;
+       console.log("in else from: "+from + " ,body: "+body +" ,$scope.to: "+$scope.to);
+       var para = document.createElement("P");
+       var t = document.createTextNode($scope.message);
+       para.appendChild(t);
+       document.getElementById("chatbox").appendChild(para);
+       $scope.$apply();
+       $scope.message = "";
     };
 
     taskSocket.onclose = function() {
 
         $scope.message = {
             type: "danger",
-        short: "Socket error",
-        long: "An error occured with the WebSocket."
+            short: "Socket error",
+            long: "An e startrror occured with the WebSocket."
     };
         $scope.$apply();
     };
 
     $scope.send = function () {
         var body=$scope.messageText;
-        var messageToSend = JSON.stringify({from : $scope.username, body: body, to: $scope.to});
+        var messageToSend = JSON.stringify({from : $scope.username, body: body, to: $scope.to, id: $scope.id});
         taskSocket.send(messageToSend);
-        $scope.messageList.push($scope.messageText);
+
+        var para = document.createElement("P");
+        var t = document.createTextNode($scope.username+": "+$scope.messageText);
+        para.appendChild(t);
+        document.getElementById("chatbox").appendChild(para);
+
         $scope.messageText = "";
     };
 
@@ -119,7 +131,10 @@ app.controller('personCtrl', function($scope) {
         if (button.style.display === 'block' || button.style.display === '')
             button.style.display = 'none';
         else
-            button.style.display = 'block'
+            button.style.display = 'block';
+
+        var messageToSend = JSON.stringify({name : $scope.username, to: $scope.to, id: $scope.id});
+        taskSocket.send(messageToSend);
     };
 });
 

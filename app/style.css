@@ -37,7 +37,7 @@ a:hover { text-decoration:underline; }
     height:600px;
     width:600px;
     border:1px solid #ACD8F0;
-    overflow:auto;
+    overflow:scroll;
 }
 
 #info{
