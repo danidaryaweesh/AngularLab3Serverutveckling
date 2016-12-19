@@ -14,15 +14,13 @@ app.controller('personCtrl', function($scope) {
     $scope.message="begining";
     $scope.id = Math.floor((Math.random() * 10000000) + 1).toString();
 
-
     var taskSocket = new WebSocket("ws://130.229.183.91:1337");
-
-
 
     taskSocket.onmessage = function(message) {
         if(message.data.indexOf("/wrong password") >=0){
             console.log("redirecting!");
-           window.location = "/chat.html";
+            $scope.password="";
+            window.location = "/chat.html";
         }else {
             $scope.message = message.data;
             var para = document.createElement("P");
@@ -58,8 +56,7 @@ app.controller('personCtrl', function($scope) {
     };
 
     $scope.toggle = function () {
-        // toggle and register $scope.to..
-        // .
+
         var form= document.getElementById('info');
         if (form.style.display === 'block' || form.style.display === '')
             form.style.display = 'none';
