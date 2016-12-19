@@ -7,18 +7,12 @@
 
 <body ng-app="myApp" ng-controller="personCtrl">
 
-<div id="loginForm">
-    username:<input name="username" type="text" id="use" size="35" ng-model="username"/>
-    password:<input name="password" type="text" id="pass" size="35" ng-model="password"/>
-    <button id="ib" ng-click="register()">Register</button> <button ng-click="login()">login</button>
-</div>
-
-<div id="info" name="information" style="display:none" >
+<div id="info" name="information">
     To:  <input name="to" type="text" id="to" size="35" ng-model="to"/>
     <button id="infoButton" ng-click="toggle()">Save</button>
 </div>
 
-<div id="wrapper" style="display:none">
+<div id="wrapper">
     <div id="menu">
         <p class="welcome">Welcome {{username}}<b></b></p>
         <p class="newChat"><a id="exit" target="_blank" href="/otherchat.html?username={{username}}">new Chat</a></p>
