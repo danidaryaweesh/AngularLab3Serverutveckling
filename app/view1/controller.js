@@ -7,21 +7,30 @@ var login = false;
 
 app.controller('personCtrl', function($scope) {
 
-    $scope.username=getUrlParameter('username');
+    $scope.username = getUrlParameter('username');
     $scope.password="";
     $scope.to="";
     $scope.messageText="";
     $scope.message="begining";
     $scope.id = Math.floor((Math.random() * 10000000) + 1).toString();
 
-    var taskSocket = new WebSocket("ws://130.229.183.91:1337");
+    var taskSocket = new WebSocket("ws://130.229.168.175:3000");
 
     taskSocket.onmessage = function(message) {
         if(message.data.indexOf("/wrong password") >=0){
             console.log("redirecting!");
             $scope.password="";
             window.location = "/chat.html";
-        }else {
+        }
+        else if(message.data.indexOf("/error") >= 0){
+            console.log("redirecting!");
+            $scope.password="";
+            window.location = "/chat.html";
+        }
+        else if(message.data.indexOf("/success") >= 0){
+
+        }
+        else{
             $scope.message = message.data;
             var para = document.createElement("P");
             var t = document.createTextNode($scope.message);
